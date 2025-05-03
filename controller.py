@@ -19,10 +19,11 @@ from PyQt6.QtWidgets import QMessageBox
 
 
 
+
 class Controller(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        self.setupUi(self)  # Загружаем основной интерфейс
+        self.setupUi(self)
         self.main_window = None
         self.login_window = None
         self.vote_window = None
@@ -38,6 +39,7 @@ class Controller(QMainWindow, Ui_MainWindow):
         self.reset_code = None
         self.election_name = None
         self.current_account = None
+        self.candidate_list = []
 
 
     def show_main_window(self):
@@ -62,12 +64,12 @@ class Controller(QMainWindow, Ui_MainWindow):
         self.ui_main.pushButton_3.clicked.connect(self.task)
         self.ui_main.pushButton_7.clicked.connect(self.go_show_vote_window)
         self.ui_main.pushButton_8.clicked.connect(self.add_candidates)
+        self.ui_main.pushButton_9.clicked.connect(self.check_at_least_two_candidates)
         self.ui_main.tabWidget.tabBar().hide()
 
     def cast_vote(self):
-        candidate_id_text = self.ui_vote.lineEdit.text()  # Получаем текст из поля ввода
+        candidate_id_text = self.ui_vote.lineEdit.text()
 
-        # Проверяем, не пустое ли поле ввода
         if not candidate_id_text:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Icon.Warning)
@@ -75,9 +77,7 @@ class Controller(QMainWindow, Ui_MainWindow):
             msg.setWindowTitle("Error")
             msg.setStandardButtons(QMessageBox.StandardButton.Ok)
             msg.exec()
-            return  # Выход из метода, если ID кандидата пуст
 
-        # Преобразуем в int, если текст не пустой
         try:
             candidate_id = int(candidate_id_text)
         except ValueError:
@@ -87,9 +87,7 @@ class Controller(QMainWindow, Ui_MainWindow):
             msg.setWindowTitle("Error")
             msg.setStandardButtons(QMessageBox.StandardButton.Ok)
             msg.exec()
-            return  # Выход из метода, если преобразование не удалось
 
-        # Проверяем, если пользователь не залогинен
         if not self.current_account:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Icon.Warning)
@@ -99,7 +97,7 @@ class Controller(QMainWindow, Ui_MainWindow):
             msg.exec()
 
         else:
-            candidate = self.candidate.get_candidate_id(candidate_id)
+            candidate = self.candidate.get_candidate_id(int(candidate_id_text))
             if not candidate:
                 msg = QMessageBox()
                 msg.setIcon(QMessageBox.Icon.Warning)
@@ -110,8 +108,7 @@ class Controller(QMainWindow, Ui_MainWindow):
 
             else:
 
-                election_name1 = self.ui_main.lineEdit_14.text()  # Получаем имя выборов из поля ввода
-                # Проверяем, проголосовал ли пользователь уже на этих выборах
+                election_name1 = self.ui_main.lineEdit_14.text()
                 if self.vote.has_already_voted(self.current_account, election_name1):
                     msg = QMessageBox()
                     msg.setIcon(QMessageBox.Icon.Warning)
@@ -121,8 +118,7 @@ class Controller(QMainWindow, Ui_MainWindow):
                     msg.exec()
 
                 else:
-                    # Сохраняем голос пользователя
-                    self.vote.save_vote(self.current_account, election_name1, candidate_id)
+                    self.vote.save_vote(self.current_account, election_name1, int(candidate_id_text))
                     msg = QMessageBox()
                     msg.setIcon(QMessageBox.Icon.Information)
                     msg.setText("Vote saved successfully")
@@ -157,55 +153,46 @@ class Controller(QMainWindow, Ui_MainWindow):
             msg.exec()
 
     def display_candidates_by_election(self, election_name: str):
-        # Получаем кандидатов по election_name
         candidates = self.candidate.get_candidates_by_election(election_name)
 
-        # Устанавливаем количество строк в таблице
         self.ui_vote.tableWidget.setRowCount(len(candidates))
-        self.ui_vote.tableWidget.setColumnCount(5)  # Устанавливаем количество столбцов (Candidate ID, Name, Party, Profile)
+        self.ui_vote.tableWidget.setColumnCount(5)
         self.ui_vote.tableWidget.setHorizontalHeaderLabels(["Candidate ID","Election Name", "Name", "Party", "Profile"])
 
-        # Заголовки
         header_font = self.ui_vote.tableWidget.horizontalHeader().font()
         header_font.setBold(True)
         self.ui_vote.tableWidget.horizontalHeader().setFont(header_font)
         self.ui_vote.tableWidget.setStyleSheet("QHeaderView::section { color: black; }")
 
-        # Заполняем таблицу данными
         for row_index, candidate in enumerate(candidates):
-            # Для столбца Candidate ID используем candidate_id из базы данных
             item_id = QTableWidgetItem(str(candidate.get_id()))
-            item_id.setTextAlignment(Qt.AlignmentFlag.AlignCenter)  # Выравниваем текст по центру
+            item_id.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             self.ui_vote.tableWidget.setItem(row_index, 0, item_id)
 
-            # Для других столбцов (Name, Party, Profile)
             item_election_name = QTableWidgetItem(candidate.get_election_name())
-            item_election_name.setTextAlignment(Qt.AlignmentFlag.AlignCenter)  # Выравниваем текст по центру
+            item_election_name.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             self.ui_vote.tableWidget.setItem(row_index, 1, item_election_name)
 
             item_name = QTableWidgetItem(candidate.get_name())
-            item_name.setTextAlignment(Qt.AlignmentFlag.AlignCenter)  # Выравниваем текст по центру
+            item_name.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             self.ui_vote.tableWidget.setItem(row_index, 2, item_name)
 
             item_party = QTableWidgetItem(candidate.get_party())
-            item_party.setTextAlignment(Qt.AlignmentFlag.AlignCenter)  # Выравниваем текст по центру
+            item_party.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             self.ui_vote.tableWidget.setItem(row_index, 3, item_party)
 
             item_profile = QTableWidgetItem(candidate.get_profile())
-            item_profile.setTextAlignment(Qt.AlignmentFlag.AlignCenter)  # Выравниваем текст по центру
+            item_profile.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             self.ui_vote.tableWidget.setItem(row_index, 4, item_profile)
 
-            # Устанавливаем черный цвет текста для всех ячеек в текущей строке
-            for col_index in range(5):  # Индексы столбцов от 0 до 3
+            for col_index in range(5):
                 item = self.ui_vote.tableWidget.item(row_index, col_index)
                 if item:
-                    item.setForeground(QBrush(Qt.GlobalColor.black))  # Устанавливаем черный цвет текста
+                    item.setForeground(QBrush(Qt.GlobalColor.black))
 
-        # Автоматическая настройка размера колонок и строк
         self.ui_vote.tableWidget.resizeColumnsToContents()
         self.ui_vote.tableWidget.resizeRowsToContents()
 
-        # Растягиваем последний столбец и настраиваем изменение размера
         self.ui_vote.tableWidget.horizontalHeader().setStretchLastSection(True)
         self.ui_vote.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 
@@ -215,6 +202,7 @@ class Controller(QMainWindow, Ui_MainWindow):
 
 
     def message(self):
+        self.candidate_list = []
         self.election_name = self.ui_main.lineEdit_11.text()
         start_date = self.ui_main.lineEdit_12.text()
         end_date = self.ui_main.lineEdit_13.text()
@@ -228,7 +216,7 @@ class Controller(QMainWindow, Ui_MainWindow):
             msg.setStandardButtons(QMessageBox.StandardButton.Ok)
             msg.exec()
             c+=1
-            return
+
 
 
         if not self.model.validate_date_format(start_date):
@@ -239,7 +227,6 @@ class Controller(QMainWindow, Ui_MainWindow):
             msg.setStandardButtons(QMessageBox.StandardButton.Ok)
             msg.exec()
             c+=1
-            return
 
         if not self.model.validate_date_format(end_date):
             msg = QMessageBox()
@@ -249,7 +236,7 @@ class Controller(QMainWindow, Ui_MainWindow):
             msg.setStandardButtons(QMessageBox.StandardButton.Ok)
             msg.exec()
             c+=1
-            return
+
 
         if c == 0:
             msg = QMessageBox()
@@ -271,6 +258,7 @@ class Controller(QMainWindow, Ui_MainWindow):
         name_of_candidate = self.ui_main.lineEdit_15.text()
         party = self.ui_main.lineEdit_16.text()
         profile = self.ui_main.lineEdit_18.text()
+
         if not name_of_candidate or not name_of_election or not party or not profile:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Icon.Warning)
@@ -287,8 +275,22 @@ class Controller(QMainWindow, Ui_MainWindow):
             msg.setStandardButtons(QMessageBox.StandardButton.Ok)
             msg.exec()
             candidate = Candidate(name_of_election, name_of_candidate, party, profile)
-
             self.candidate.insert(candidate)
+            self.candidate_list.append(candidate)
+
+    def check_at_least_two_candidates(self):
+        if len(self.candidate_list) < 2:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Icon.Warning)
+            msg.setText("You need to add at least 2 candidates")
+            msg.setWindowTitle("Error")
+            msg.setStandardButtons(QMessageBox.StandardButton.Ok)
+            msg.exec()
+        else:
+            self.ui_main.tabWidget.setCurrentIndex(0)
+            self.ui_main.lineEdit_15.clear()
+            self.ui_main.lineEdit_16.clear()
+            self.ui_main.lineEdit_18.clear()
 
     def display_elections(self):
         elections = self.election.get_all_elections()
@@ -311,16 +313,24 @@ class Controller(QMainWindow, Ui_MainWindow):
                 print(f"Skipping incomplete election data at row {row_index}")
                 continue
 
-            for col_index, value in enumerate(election[1:]):  # Пропускаем ID (election[1:])
+            for col_index, value in enumerate(election[1:]):
                 if row_index < len(elections) and col_index < 3:
                     item = QTableWidgetItem(str(value))
                     item.setForeground(QBrush(Qt.GlobalColor.black))
 
-                    # Выравнивание текста по центру
                     item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-
                     self.ui_main.tableWidget.setItem(row_index, col_index, item)
 
+        self.ui_main.tableWidget.setStyleSheet("""
+            QTableWidget {
+                border: 2px solid black;  /* Граница для каждой ячейки */
+                padding: 5px;  /* Отступы внутри ячеек */
+            }
+            QTableWidget::item {
+                border: 1px solid black;  /* Граница для каждой ячейки */
+                padding: 5px;  /* Отступы внутри ячеек */
+            }
+        """)
         self.ui_main.tableWidget.resizeColumnsToContents()
         self.ui_main.tableWidget.resizeRowsToContents()
 

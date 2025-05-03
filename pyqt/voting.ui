@@ -144,7 +144,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -584,7 +584,7 @@
        <rect>
         <x>60</x>
         <y>40</y>
-        <width>1311</width>
+        <width>1401</width>
         <height>71</height>
        </rect>
       </property>
@@ -598,7 +598,7 @@
 </string>
       </property>
       <property name="text">
-       <string>Please, add candidates (name , party, profile)</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;Please, add at least 2 candidates (name , party, profile)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="textFormat">
        <enum>Qt::MarkdownText</enum>
@@ -614,7 +614,7 @@
       <property name="geometry">
        <rect>
         <x>70</x>
-        <y>240</y>
+        <y>180</y>
         <width>411</width>
         <height>51</height>
        </rect>
@@ -649,7 +649,7 @@
       <property name="geometry">
        <rect>
         <x>70</x>
-        <y>320</y>
+        <y>280</y>
         <width>411</width>
         <height>51</height>
        </rect>
@@ -680,46 +680,11 @@
        <string>party</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_17">
-      <property name="geometry">
-       <rect>
-        <x>70</x>
-        <y>160</y>
-        <width>411</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>-1</pointsize>
-       </font>
-      </property>
-      <property name="cursor">
-       <cursorShape>IBeamCursor</cursorShape>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QLineEdit {
-    color: rgb(0, 0, 0);
-    font-size: 14px;
-    border-radius: 10px;
-    padding-left: 15px;
-    border: 2px solid rgb(191, 191, 191); /* Границы серого цвета */
-    background-color: rgb(255, 255, 255);
-}
-</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="placeholderText">
-       <string>name of election</string>
-      </property>
-     </widget>
      <widget class="QLineEdit" name="lineEdit_18">
       <property name="geometry">
        <rect>
         <x>70</x>
-        <y>400</y>
+        <y>380</y>
         <width>411</width>
         <height>51</height>
        </rect>
@@ -753,8 +718,8 @@
      <widget class="QPushButton" name="pushButton_8">
       <property name="geometry">
        <rect>
-        <x>660</x>
-        <y>400</y>
+        <x>610</x>
+        <y>380</y>
         <width>161</width>
         <height>51</height>
        </rect>
@@ -776,6 +741,34 @@
       </property>
       <property name="text">
        <string>Add</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_9">
+      <property name="geometry">
+       <rect>
+        <x>600</x>
+        <y>530</y>
+        <width>201</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: rgb(63, 55, 104);
+	border-radius: 10px;
+	font-size: 23px;
+	border: 1px solid white;
+
+}
+
+
+</string>
+      </property>
+      <property name="text">
+       <string>Finish </string>
       </property>
      </widget>
     </widget>

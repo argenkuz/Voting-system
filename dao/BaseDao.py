@@ -4,15 +4,11 @@ import time
 class Dao:
     def __init__(self, db_path):
         self._connection = sqlite3.connect(db_path)
-        self._connection.execute("PRAGMA busy_timeout = 5000")  # Устанавливаем время ожидания 5 секунд
+        self._connection.execute("PRAGMA busy_timeout = 5000")
         self._cursor = self._connection.cursor()
-        self._connection.execute("PRAGMA journal_mode=WAL")  # Включаем WAL для улучшенной работы с блокировками
+        self._connection.execute("PRAGMA journal_mode=WAL")
 
     def execute_query(self, query, params=None):
-        """
-        Выполнение запросов, таких как INSERT, UPDATE, DELETE, с коммитом.
-        Возвращает курсор для дальнейшей работы.
-        """
         attempts = 3
         for attempt in range(attempts):
             try:
@@ -21,15 +17,12 @@ class Dao:
                 return self._cursor
             except sqlite3.OperationalError as e:
                 if "locked" in str(e).lower():
-                    time.sleep(1)  # Подождать 1 секунду перед повторной попыткой
+                    time.sleep(1)
                 else:
-                    raise  # Если ошибка не из-за блокировки, пробрасываем ее
+                    raise
         raise sqlite3.OperationalError("Database is still locked after multiple attempts")
 
     def fetch_all(self, query, params=None):
-        """
-        Выполнение SELECT-запроса и возврат всех результатов.
-        """
         attempts = 3
         for attempt in range(attempts):
             try:
@@ -37,15 +30,13 @@ class Dao:
                 return self._cursor.fetchall()
             except sqlite3.OperationalError as e:
                 if "locked" in str(e).lower():
-                    time.sleep(1)  # Подождать 1 секунду перед повторной попыткой
+                    time.sleep(1)
                 else:
-                    raise  # Если ошибка не из-за блокировки, пробрасываем ее
+                    raise
         raise sqlite3.OperationalError("Database is still locked after multiple attempts")
 
     def fetch_one(self, query, params=None):
-        """
-        Выполнение SELECT-запроса и возврат только одной строки результата.
-        """
+
         attempts = 3
         for attempt in range(attempts):
             try:
@@ -53,9 +44,9 @@ class Dao:
                 return self._cursor.fetchone()
             except sqlite3.OperationalError as e:
                 if "locked" in str(e).lower():
-                    time.sleep(1)  # Подождать 1 секунду перед повторной попыткой
+                    time.sleep(1)
                 else:
-                    raise  # Если ошибка не из-за блокировки, пробрасываем ее
+                    raise
         raise sqlite3.OperationalError("Database is still locked after multiple attempts")
 
     def close(self):

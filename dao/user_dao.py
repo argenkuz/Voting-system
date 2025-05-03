@@ -19,8 +19,7 @@ class UserDAO(Dao):
         self._cursor.execute(query, (username,))
         result = self._cursor.fetchone()
         if result:
-            # Если в таблице больше 5 столбцов, нужно передавать только те, которые нужны для конструктора User
-            return User(result[1], result[2], result[3], result[4])  # Передаем только нужные поля
+            return User(result[1], result[2], result[3], result[4])
         return None
 
     def find_by_email(self, email: str):
@@ -34,10 +33,9 @@ class UserDAO(Dao):
     def get_all_users(self):
         query = "SELECT * FROM Users"
         self._cursor.execute(query)
-        return self._cursor.fetchall()  # Возвращаем все результаты, если они есть
-
+        return self._cursor.fetchall()
     def update_password(self, email: str, new_password: str):
         query = "UPDATE Users SET password = ? WHERE email = ?"
         self.execute_query(query, (new_password, email))
         self._connection.commit()
-        return self._cursor.rowcount  # Возвращаем количество обновленных строк
+        return self._cursor.rowcount

@@ -70,7 +70,6 @@ class TestModel(unittest.TestCase):
         self.assertFalse(self.model.is_valid_phone_number("123456789"))
 
     def test_send_reset_password_fake_email(self):
-        # Don't actually send, just check return type (None or code)
         code = self.model.send_reset_password("test@example.com")
         self.assertTrue(isinstance(code, int) or code is None)
 

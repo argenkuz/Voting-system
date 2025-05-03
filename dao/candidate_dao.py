@@ -9,7 +9,6 @@ class CandidateDAO(Dao):
         super().__init__(db_path)
 
     def insert(self, candidate: Candidate):
-        # Убедитесь, что отступы правильные
         query = "INSERT INTO Candidates (election_name, name, party, profile) VALUES (? ,? ,? ,? )"
         self.execute_query(query, (candidate.get_election_name(), candidate.get_name(), candidate.get_party(), candidate.get_profile()))
         self._connection.commit()
@@ -22,9 +21,8 @@ class CandidateDAO(Dao):
 
         candidates = []
         for row in result:
-            # Присваиваем candidate_id, и передаем только 4 другие значения в конструктор Candidate
-            candidate = Candidate(row[1], row[2], row[3], row[4])  # Передаем только election_name, name, party, profile
-            candidate.set_id(row[0])  # Присваиваем candidate_id
+            candidate = Candidate(row[1], row[2], row[3], row[4])
+            candidate.set_id(row[0])
             candidates.append(candidate)
 
         return candidates

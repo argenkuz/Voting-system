@@ -273,7 +273,7 @@ class Ui_MainWindow(object):
         self.tab_4 = QtWidgets.QWidget()
         self.tab_4.setObjectName("tab_4")
         self.label_9 = QtWidgets.QLabel(parent=self.tab_4)
-        self.label_9.setGeometry(QtCore.QRect(60, 40, 1311, 71))
+        self.label_9.setGeometry(QtCore.QRect(60, 40, 1401, 71))
         self.label_9.setStyleSheet("QLabel {\n"
 "    font-family: \"Georgia\"; /* Или \"Times New Roman\" для похожего стиля */\n"
 "    font-size: 50px;\n"
@@ -286,7 +286,7 @@ class Ui_MainWindow(object):
         self.label_9.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label_9.setObjectName("label_9")
         self.lineEdit_15 = QtWidgets.QLineEdit(parent=self.tab_4)
-        self.lineEdit_15.setGeometry(QtCore.QRect(70, 240, 411, 51))
+        self.lineEdit_15.setGeometry(QtCore.QRect(70, 180, 411, 51))
         font = QtGui.QFont()
         font.setPointSize(-1)
         self.lineEdit_15.setFont(font)
@@ -303,7 +303,7 @@ class Ui_MainWindow(object):
         self.lineEdit_15.setText("")
         self.lineEdit_15.setObjectName("lineEdit_15")
         self.lineEdit_16 = QtWidgets.QLineEdit(parent=self.tab_4)
-        self.lineEdit_16.setGeometry(QtCore.QRect(70, 320, 411, 51))
+        self.lineEdit_16.setGeometry(QtCore.QRect(70, 280, 411, 51))
         font = QtGui.QFont()
         font.setPointSize(-1)
         self.lineEdit_16.setFont(font)
@@ -319,25 +319,8 @@ class Ui_MainWindow(object):
 "")
         self.lineEdit_16.setText("")
         self.lineEdit_16.setObjectName("lineEdit_16")
-        self.lineEdit_17 = QtWidgets.QLineEdit(parent=self.tab_4)
-        self.lineEdit_17.setGeometry(QtCore.QRect(70, 160, 411, 51))
-        font = QtGui.QFont()
-        font.setPointSize(-1)
-        self.lineEdit_17.setFont(font)
-        self.lineEdit_17.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.IBeamCursor))
-        self.lineEdit_17.setStyleSheet("QLineEdit {\n"
-"    color: rgb(0, 0, 0);\n"
-"    font-size: 14px;\n"
-"    border-radius: 10px;\n"
-"    padding-left: 15px;\n"
-"    border: 2px solid rgb(191, 191, 191); /* Границы серого цвета */\n"
-"    background-color: rgb(255, 255, 255);\n"
-"}\n"
-"")
-        self.lineEdit_17.setText("")
-        self.lineEdit_17.setObjectName("lineEdit_17")
         self.lineEdit_18 = QtWidgets.QLineEdit(parent=self.tab_4)
-        self.lineEdit_18.setGeometry(QtCore.QRect(70, 400, 411, 51))
+        self.lineEdit_18.setGeometry(QtCore.QRect(70, 380, 411, 51))
         font = QtGui.QFont()
         font.setPointSize(-1)
         self.lineEdit_18.setFont(font)
@@ -354,7 +337,7 @@ class Ui_MainWindow(object):
         self.lineEdit_18.setText("")
         self.lineEdit_18.setObjectName("lineEdit_18")
         self.pushButton_8 = QtWidgets.QPushButton(parent=self.tab_4)
-        self.pushButton_8.setGeometry(QtCore.QRect(660, 400, 161, 51))
+        self.pushButton_8.setGeometry(QtCore.QRect(610, 380, 161, 51))
         self.pushButton_8.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
         self.pushButton_8.setStyleSheet("QPushButton {\n"
 "    background-color: rgb(63, 55, 104);\n"
@@ -367,6 +350,20 @@ class Ui_MainWindow(object):
 "\n"
 "")
         self.pushButton_8.setObjectName("pushButton_8")
+        self.pushButton_9 = QtWidgets.QPushButton(parent=self.tab_4)
+        self.pushButton_9.setGeometry(QtCore.QRect(600, 530, 201, 71))
+        self.pushButton_9.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.pushButton_9.setStyleSheet("QPushButton {\n"
+"    background-color: rgb(63, 55, 104);\n"
+"    border-radius: 10px;\n"
+"    font-size: 23px;\n"
+"    border: 1px solid white;\n"
+"\n"
+"}\n"
+"\n"
+"\n"
+"")
+        self.pushButton_9.setObjectName("pushButton_9")
         self.tabWidget.addTab(self.tab_4, "")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=MainWindow)
@@ -403,10 +400,10 @@ class Ui_MainWindow(object):
         self.lineEdit_14.setPlaceholderText(_translate("MainWindow", "Write the name of the election you want to participate "))
         self.pushButton_7.setText(_translate("MainWindow", "Participate"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", "Страница"))
-        self.label_9.setText(_translate("MainWindow", "Please, add candidates (name , party, profile)"))
+        self.label_9.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:36pt;\">Please, add at least 2 candidates (name , party, profile)</span></p></body></html>"))
         self.lineEdit_15.setPlaceholderText(_translate("MainWindow", "name of candidates"))
         self.lineEdit_16.setPlaceholderText(_translate("MainWindow", "party"))
-        self.lineEdit_17.setPlaceholderText(_translate("MainWindow", "name of election"))
         self.lineEdit_18.setPlaceholderText(_translate("MainWindow", "profile"))
         self.pushButton_8.setText(_translate("MainWindow", "Add"))
+        self.pushButton_9.setText(_translate("MainWindow", "Finish "))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("MainWindow", "Страница"))
