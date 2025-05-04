@@ -251,7 +251,7 @@ The `Controller` class connects the GUI with the application logic. It manages u
 - It uses DAO classes for database operations and the `Model` class for business logic.
 
 ### 🖼️ UML Diagram
-![uml.png](uml.png)
+![uml.png](icons/uml.png)
 
 ## 📊 Database Reports
 

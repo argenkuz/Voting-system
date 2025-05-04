@@ -27,10 +27,16 @@ class CandidateDAO(Dao):
 
         return candidates
 
-    def get_candidate_id(self,candidate_id):
-        query = "SELECT candidate_id FROM Candidates WHERE candidate_id = ?"
-        result = self.fetch_one(query, (candidate_id,))
-        if result:
-            return result[0]
-        else:
-            return None
+    def find_by_id_use_election(self, candidate_id, election_name):
+        query = "SELECT * FROM Candidates WHERE candidate_id = ? AND election_name = ?"
+        row = self.fetch_one(query, (candidate_id, election_name))
+
+        # Если результат найден
+        if row:
+            # Предполагаем, что у нас есть колонка с id (например, row[0] - это id)
+            # и остальные столбцы идут по порядку: election_name, name, party, profile
+            return Candidate(row[1], row[2], row[3], row[4])  # Возвращаем кандидата
+
+        # Если кандидат не найден
+        return None
+

@@ -13,6 +13,8 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1470, 829)
+        MainWindow.setMinimumSize(QtCore.QSize(1470, 829))
+        MainWindow.setMaximumSize(QtCore.QSize(1470, 829))
         MainWindow.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -239,7 +241,9 @@ class Ui_MainWindow(object):
         self.label_8.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label_8.setObjectName("label_8")
         self.lineEdit_14 = QtWidgets.QLineEdit(parent=self.tab_3)
-        self.lineEdit_14.setGeometry(QtCore.QRect(510, 570, 461, 61))
+        self.lineEdit_14.setGeometry(QtCore.QRect(470, 570, 510, 61))
+        self.lineEdit_14.setMinimumSize(QtCore.QSize(0, 0))
+        self.lineEdit_14.setMaximumSize(QtCore.QSize(510, 570))
         font = QtGui.QFont()
         font.setPointSize(-1)
         self.lineEdit_14.setFont(font)
@@ -375,7 +379,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(3)
+        self.tabWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

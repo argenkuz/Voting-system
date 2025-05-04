@@ -26,7 +26,7 @@ class Ui_LoginWindow(object):
         self.tab_1 = QtWidgets.QWidget()
         self.tab_1.setObjectName("tab_1")
         self.pushButton_3 = QtWidgets.QPushButton(parent=self.tab_1)
-        self.pushButton_3.setGeometry(QtCore.QRect(60, 210, 411, 41))
+        self.pushButton_3.setGeometry(QtCore.QRect(60, 180, 411, 41))
         font = QtGui.QFont()
         font.setPointSize(16)
         font.setBold(False)
@@ -50,7 +50,7 @@ class Ui_LoginWindow(object):
 "")
         self.pushButton_3.setObjectName("pushButton_3")
         self.pushButton_4 = QtWidgets.QPushButton(parent=self.tab_1)
-        self.pushButton_4.setGeometry(QtCore.QRect(60, 260, 411, 41))
+        self.pushButton_4.setGeometry(QtCore.QRect(60, 240, 411, 41))
         font = QtGui.QFont()
         font.setPointSize(16)
         font.setBold(False)
@@ -73,7 +73,7 @@ class Ui_LoginWindow(object):
 "")
         self.pushButton_4.setObjectName("pushButton_4")
         self.label = QtWidgets.QLabel(parent=self.tab_1)
-        self.label.setGeometry(QtCore.QRect(160, 130, 181, 51))
+        self.label.setGeometry(QtCore.QRect(160, 90, 181, 51))
         self.label.setStyleSheet("\n"
 "color: rgb(0, 0, 0);\n"
 "font-weight: bold;\n"
@@ -81,7 +81,7 @@ class Ui_LoginWindow(object):
         self.label.setOpenExternalLinks(False)
         self.label.setObjectName("label")
         self.pushButton_12 = QtWidgets.QPushButton(parent=self.tab_1)
-        self.pushButton_12.setGeometry(QtCore.QRect(170, 340, 201, 41))
+        self.pushButton_12.setGeometry(QtCore.QRect(170, 390, 201, 41))
         self.pushButton_12.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
         self.pushButton_12.setStyleSheet("QPushButton {\n"
 "    font-weight: bold;\n"
@@ -111,6 +111,30 @@ class Ui_LoginWindow(object):
         self.label_23.setPixmap(QtGui.QPixmap("../icons/Снимок экрана 2025-04-10 в 13.48.10.png"))
         self.label_23.setScaledContents(True)
         self.label_23.setObjectName("label_23")
+        self.pushButton_5 = QtWidgets.QPushButton(parent=self.tab_1)
+        self.pushButton_5.setGeometry(QtCore.QRect(60, 300, 411, 41))
+        font = QtGui.QFont()
+        font.setPointSize(16)
+        font.setBold(False)
+        self.pushButton_5.setFont(font)
+        self.pushButton_5.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.pushButton_5.setStyleSheet("QPushButton {\n"
+"    background-color: rgb(63, 55, 104);\n"
+"    border-radius: 15px;\n"
+"    color: rgb(255, 255, 255);\n"
+"font-weight: normal;\n"
+"outline: none;\n"
+"\n"
+"    \n"
+"    \n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(60, 90, 156);\n"
+"}\n"
+"")
+        self.pushButton_5.setObjectName("pushButton_5")
         self.label_2.raise_()
         self.pushButton_3.raise_()
         self.pushButton_4.raise_()
@@ -119,6 +143,7 @@ class Ui_LoginWindow(object):
         self.label_3.raise_()
         self.label_22.raise_()
         self.label_23.raise_()
+        self.pushButton_5.raise_()
         self.tabWidget.addTab(self.tab_1, "")
         self.tab_4 = QtWidgets.QWidget()
         self.tab_4.setObjectName("tab_4")
@@ -251,7 +276,7 @@ class Ui_LoginWindow(object):
         self.tab_2 = QtWidgets.QWidget()
         self.tab_2.setObjectName("tab_2")
         self.lineEdit_9 = QtWidgets.QLineEdit(parent=self.tab_2)
-        self.lineEdit_9.setGeometry(QtCore.QRect(20, 230, 311, 41))
+        self.lineEdit_9.setGeometry(QtCore.QRect(20, 160, 311, 41))
         font = QtGui.QFont()
         font.setPointSize(-1)
         self.lineEdit_9.setFont(font)
@@ -303,7 +328,7 @@ class Ui_LoginWindow(object):
         self.lineEdit_13.setText("")
         self.lineEdit_13.setObjectName("lineEdit_13")
         self.lineEdit_14 = QtWidgets.QLineEdit(parent=self.tab_2)
-        self.lineEdit_14.setGeometry(QtCore.QRect(20, 160, 311, 41))
+        self.lineEdit_14.setGeometry(QtCore.QRect(20, 230, 311, 41))
         font = QtGui.QFont()
         font.setPointSize(-1)
         self.lineEdit_14.setFont(font)
@@ -643,7 +668,7 @@ class Ui_LoginWindow(object):
         LoginWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(LoginWindow)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(LoginWindow)
 
     def retranslateUi(self, LoginWindow):
@@ -655,6 +680,7 @@ class Ui_LoginWindow(object):
         self.pushButton_12.setText(_translate("LoginWindow", "Try first"))
         self.label_3.setText(_translate("LoginWindow", "TextLabel"))
         self.label_2.setText(_translate("LoginWindow", "          |"))
+        self.pushButton_5.setText(_translate("LoginWindow", "Log out"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_1), _translate("LoginWindow", "Страница"))
         self.pushButton_9.setText(_translate("LoginWindow", "Cancel"))
         self.pushButton_10.setText(_translate("LoginWindow", "Login"))
@@ -663,10 +689,10 @@ class Ui_LoginWindow(object):
         self.lineEdit_16.setPlaceholderText(_translate("LoginWindow", "password"))
         self.label_4.setText(_translate("LoginWindow", "Login"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("LoginWindow", "Tab 1"))
-        self.lineEdit_9.setPlaceholderText(_translate("LoginWindow", "password"))
+        self.lineEdit_9.setPlaceholderText(_translate("LoginWindow", "email"))
         self.lineEdit_10.setPlaceholderText(_translate("LoginWindow", "phone number"))
         self.lineEdit_13.setPlaceholderText(_translate("LoginWindow", "username"))
-        self.lineEdit_14.setPlaceholderText(_translate("LoginWindow", "email"))
+        self.lineEdit_14.setPlaceholderText(_translate("LoginWindow", "password"))
         self.pushButton_6.setText(_translate("LoginWindow", "Sign up"))
         self.pushButton_8.setText(_translate("LoginWindow", "Cancel"))
         self.label_5.setText(_translate("LoginWindow", "Create account"))

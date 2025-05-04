@@ -8,11 +8,10 @@ class UserDAO(Dao):
     def __init__(self, db_path):
         super().__init__(db_path)
 
-    def insert(self, user: User):
+    def insert(self, user):
         query = "INSERT INTO Users (username, email, password, phone_number) VALUES (?, ?, ?, ?)"
-        self.execute_query(query, (user.get_username(), user.get_email(), user.get_password(), user.get_phone_number()))
+        self._cursor.execute(query, (user.get_username(), user.get_email(), user.get_password(), user.get_phone_number()))
         self._connection.commit()
-        return self._cursor.lastrowid
 
     def find_by_username(self, username: str):
         query = "SELECT * FROM Users WHERE username = ?"

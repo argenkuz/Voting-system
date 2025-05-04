@@ -46,7 +46,7 @@ background-color: rgb(255, 255, 255);</string>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab_1">
      <attribute name="title">
@@ -56,7 +56,7 @@ background-color: rgb(255, 255, 255);</string>
       <property name="geometry">
        <rect>
         <x>60</x>
-        <y>210</y>
+        <y>180</y>
         <width>411</width>
         <height>41</height>
        </rect>
@@ -96,7 +96,7 @@ QPushButton:hover {
       <property name="geometry">
        <rect>
         <x>60</x>
-        <y>260</y>
+        <y>240</y>
         <width>411</width>
         <height>41</height>
        </rect>
@@ -135,7 +135,7 @@ QPushButton:hover {
       <property name="geometry">
        <rect>
         <x>160</x>
-        <y>130</y>
+        <y>90</y>
         <width>181</width>
         <height>51</height>
        </rect>
@@ -157,7 +157,7 @@ font-size: 30px</string>
       <property name="geometry">
        <rect>
         <x>170</x>
-        <y>340</y>
+        <y>390</y>
         <width>201</width>
         <height>41</height>
        </rect>
@@ -246,6 +246,46 @@ outline: none;
        <bool>true</bool>
       </property>
      </widget>
+     <widget class="QPushButton" name="pushButton_5">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>300</y>
+        <width>411</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: rgb(63, 55, 104);
+    border-radius: 15px;
+    color: rgb(255, 255, 255);
+font-weight: normal;
+outline: none;
+
+	
+	
+
+}
+
+QPushButton:hover {
+    background-color: rgb(60, 90, 156);
+}
+</string>
+      </property>
+      <property name="text">
+       <string>Log out</string>
+      </property>
+     </widget>
      <zorder>label_2</zorder>
      <zorder>pushButton_3</zorder>
      <zorder>pushButton_4</zorder>
@@ -254,6 +294,7 @@ outline: none;
      <zorder>label_3</zorder>
      <zorder>label_22</zorder>
      <zorder>label_23</zorder>
+     <zorder>pushButton_5</zorder>
     </widget>
     <widget class="QWidget" name="tab_4">
      <attribute name="title">
@@ -529,7 +570,7 @@ font-size: 23px</string>
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>230</y>
+        <y>160</y>
         <width>311</width>
         <height>41</height>
        </rect>
@@ -560,7 +601,7 @@ font-size: 23px</string>
        <set>Qt::AlignJustify|Qt::AlignVCenter</set>
       </property>
       <property name="placeholderText">
-       <string>password</string>
+       <string>email</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineEdit_10">
@@ -637,7 +678,7 @@ font-size: 23px</string>
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>160</y>
+        <y>230</y>
         <width>311</width>
         <height>41</height>
        </rect>
@@ -665,7 +706,7 @@ font-size: 23px</string>
        <string/>
       </property>
       <property name="placeholderText">
-       <string>email</string>
+       <string>password</string>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton_6">
