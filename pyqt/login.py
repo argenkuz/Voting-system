@@ -14,7 +14,7 @@ class Ui_LoginWindow(object):
         LoginWindow.setObjectName("LoginWindow")
         LoginWindow.resize(532, 550)
         LoginWindow.setMinimumSize(QtCore.QSize(532, 550))
-        LoginWindow.setMaximumSize(QtCore.QSize(532, 571))
+        LoginWindow.setMaximumSize(QtCore.QSize(532, 550))
         LoginWindow.setSizeIncrement(QtCore.QSize(0, 0))
         LoginWindow.setStyleSheet("\n"
 "background-color: rgb(255, 255, 255);")
@@ -668,7 +668,7 @@ class Ui_LoginWindow(object):
         LoginWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(LoginWindow)
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(LoginWindow)
 
     def retranslateUi(self, LoginWindow):

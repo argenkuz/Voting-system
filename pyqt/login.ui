@@ -19,7 +19,7 @@
   <property name="maximumSize">
    <size>
     <width>532</width>
-    <height>571</height>
+    <height>550</height>
    </size>
   </property>
   <property name="sizeIncrement">
@@ -46,7 +46,7 @@ background-color: rgb(255, 255, 255);</string>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab_1">
      <attribute name="title">

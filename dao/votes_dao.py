@@ -24,3 +24,16 @@ class VotesDAO(Dao):
         query = "INSERT INTO Votes (username, election_name, candidate_id, voted_at) VALUES (?, ?, ?, CURRENT_TIMESTAMP)"
         self.execute_query(query, (username, election_name, candidate_id))
         self._connection.commit()
+
+    def count_votes_for_election(self, election_name: str) -> dict[int, int]:
+        """
+        Возвращает словарь {candidate_id: votes} по указанным выборам.
+        """
+        cur = self._connection.cursor()          # обращаемся к _connection
+        cur.execute("""
+            SELECT candidate_id, COUNT(*)
+            FROM votes
+            WHERE election_name = ?
+            GROUP BY candidate_id
+        """, (election_name,))
+        return {cid: cnt for cid, cnt in cur.fetchall()}

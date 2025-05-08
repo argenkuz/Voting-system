@@ -66,7 +66,7 @@ class Ui_MainWindow(object):
         self.label_2 = QtWidgets.QLabel(parent=self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(30, 40, 61, 51))
         self.label_2.setText("")
-        self.label_2.setPixmap(QtGui.QPixmap("../icons/Снимок экрана 2025-04-26 в 23.28.00.png"))
+        self.label_2.setPixmap(QtGui.QPixmap("../icons/Снимок экрана 2025-05-06 в 14.13.06.png"))
         self.label_2.setScaledContents(True)
         self.label_2.setObjectName("label_2")
         self.tabWidget = QtWidgets.QTabWidget(parent=self.centralwidget)
@@ -369,6 +369,12 @@ class Ui_MainWindow(object):
 "")
         self.pushButton_9.setObjectName("pushButton_9")
         self.tabWidget.addTab(self.tab_4, "")
+        self.label_10 = QtWidgets.QLabel(parent=self.centralwidget)
+        self.label_10.setGeometry(QtCore.QRect(1150, 40, 61, 51))
+        self.label_10.setText("")
+        self.label_10.setPixmap(QtGui.QPixmap("../icons/Снимок экрана 2025-05-06 в 14.13.02.png"))
+        self.label_10.setScaledContents(True)
+        self.label_10.setObjectName("label_10")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1470, 21))
@@ -379,7 +385,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(3)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

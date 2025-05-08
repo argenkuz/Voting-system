@@ -17,6 +17,8 @@ from PyQt6.QtGui import QBrush
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QMessageBox
 from datetime import datetime
+from PyQt6.QtWidgets import QTableWidget, QVBoxLayout, QWidget, QLabel
+from PyQt6.QtGui import QFont
 
 
 class Controller(QMainWindow, Ui_MainWindow):
@@ -169,12 +171,7 @@ class Controller(QMainWindow, Ui_MainWindow):
                     msg.setStandardButtons(QMessageBox.StandardButton.Ok)
                     msg.exec()
                 else:
-                    msg = QMessageBox()
-                    msg.setIcon(QMessageBox.Icon.Warning)
-                    msg.setText("Election has ended.")
-                    msg.setWindowTitle("Error")
-                    msg.setStandardButtons(QMessageBox.StandardButton.Ok)
-                    msg.exec()
+                    self.display_election_results(name)
 
             else:
                 msg = QMessageBox()
@@ -191,6 +188,89 @@ class Controller(QMainWindow, Ui_MainWindow):
             msg.setWindowTitle("Error")
             msg.setStandardButtons(QMessageBox.StandardButton.Ok)
             msg.exec()
+
+    def display_election_results(self, election_name: str):
+        """Открывает окно-таблицу с итогами голосования, стилизованную как на скриншоте."""
+        # --- данные ----------------------------------------------------------------
+        candidates = self.candidate.get_candidates_by_election(election_name)
+        if not candidates:
+            QMessageBox.information(self, "Results", "Кандидаты не найдены")
+            return
+
+        votes_map = self.vote.count_votes_for_election(election_name)
+        candidates.sort(key=lambda c: votes_map.get(c.get_id(), 0), reverse=True)
+
+        # --- окно-результатов -------------------------------------------------------
+        results_win = QMainWindow(self)
+        results_win.setWindowTitle(f"Results – {election_name}")
+        results_win.resize(900, 550)
+
+        central = QWidget(results_win)
+        layout = QVBoxLayout(central)
+        layout.setContentsMargins(20, 20, 20, 20)
+        layout.setSpacing(15)
+
+        # Заголовок
+        title = QLabel(f"Results of «{election_name}»")
+        title_font = QFont()
+        title_font.setPointSize(28)
+        title_font.setBold(True)
+        title.setFont(title_font)
+        title.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(title)
+
+        # Таблица
+        table = QTableWidget(parent=central)
+        table.setColumnCount(4)
+        table.setHorizontalHeaderLabels(["ID", "Name", "Party", "Votes"])
+        table.setRowCount(len(candidates))
+
+        header_font = table.horizontalHeader().font()
+        header_font.setBold(True)
+        table.horizontalHeader().setFont(header_font)
+        table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        table.horizontalHeader().setDefaultAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        for row, cand in enumerate(candidates):
+            cid = cand.get_id()
+            table.setItem(row, 0, QTableWidgetItem(str(cid)))
+            table.setItem(row, 1, QTableWidgetItem(cand.get_name()))
+            table.setItem(row, 2, QTableWidgetItem(cand.get_party()))
+            table.setItem(row, 3, QTableWidgetItem(str(votes_map.get(cid, 0))))
+
+            # центровка текста и чёрный цвет ― как в вашем списке выборов
+            for col in range(4):
+                item = table.item(row, col)
+                item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                item.setForeground(QBrush(Qt.GlobalColor.black))
+
+        # Стиль в том же духе: толстая внешняя рамка и рамки ячеек
+        table.setStyleSheet("""
+            QTableWidget {
+                border: 2px solid black;
+                gridline-color: black;
+            }
+            QHeaderView::section {
+                background: #f0f0f0;
+                font-weight: bold;
+                border: 1px solid black;
+            }
+            QTableWidget::item {
+                border: 1px solid black;
+                padding: 4px;
+            }
+        """)
+
+        table.resizeColumnsToContents()
+        table.resizeRowsToContents()
+
+        layout.addWidget(table)
+        results_win.setCentralWidget(central)
+        results_win.show()
+
+        # сохраняем, чтобы GC не закрыл окно
+        self.results_win = results_win
+
 
     def display_candidates_by_election(self, election_name: str):
         candidates = self.candidate.get_candidates_by_election(election_name)
