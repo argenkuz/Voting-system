@@ -541,7 +541,7 @@ class Controller(QMainWindow, Ui_MainWindow):
             self.ui_login.label_10.setVisible(True)
 
         else:
-            my_password = self.dao.find_by_username(username).get_password()
+            my_password = self.dao.find_by_username(username).get_email()
             if password != my_password:
                 self.ui_login.label_10.setText("Wrong password")
                 self.ui_login.label_10.setVisible(True)
@@ -588,19 +588,20 @@ class Controller(QMainWindow, Ui_MainWindow):
     def on_send_code_clicked(self):
         self.set_visible()
         self.email = self.ui_login.lineEdit_17.text()
+
         if self.email != "":
-            result = self.dao.find_by_email(self.email)
-            if result is not None:
+            result = self.dao.find_by_email(self.email).get_password()
+
+
+            if result != self.email:
+                self.ui_login.label_20.setText("Email not found")
+                self.ui_login.label_20.setVisible(True)
+            else:
                 self.reset_code = self.model.send_reset_password(self.email)
                 self.ui_login.lineEdit_17.setEnabled(False)
                 self.ui_login.label_19.setText("Code is sent to your email")
                 self.ui_login.label_19.setVisible(True)
                 self.ui_login.lineEdit_18.setVisible(True)
-
-
-            else:
-                self.ui_login.label_20.setText("Email not found")
-                self.ui_login.label_20.setVisible(True)
         else:
             self.ui_login.label_20.setText("Input something")
             self.ui_login.label_20.setVisible(True)
